@@ -1,14 +1,14 @@
-# Sales Prediction Using Machine Learning
+# Iris Flower Classification Using Machine Learning
 
 ## Project Overview
-This project predicts product sales based on advertising budgets using Machine Learning techniques.
+This project uses Machine Learning to classify iris flowers into different species based on their measurements.
 
-The model analyzes advertising spending on:
-- TV
-- Radio
-- Newspaper
+The model predicts:
+- Setosa
+- Versicolor
+- Virginica
 
-and predicts future sales.
+using flower feature measurements.
 
 ---
 
@@ -26,26 +26,26 @@ and predicts future sales.
 - Data preprocessing
 - Data visualization
 - Machine learning model training
-- Sales prediction
-- Model evaluation
+- Flower species prediction
+- Confusion matrix visualization
 
 ---
 
 ## Dataset
-Advertising Sales Dataset
+Iris Flower Dataset
 
 ---
 
 ## Machine Learning Model Used
-- Linear Regression
+- Logistic Regression
 
 ---
 
 ## Project Files
-- YatharthDeaale_Task5.py → Main code
+- YatharthDeaale_Task1.py → Main code
 - README.md → Documentation
 - requirements.txt → Required libraries
-- Advertising.csv → Dataset
+- Iris.csv → Dataset
 - screenshots/ → Output screenshots
 
 ---

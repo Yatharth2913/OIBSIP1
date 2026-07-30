@@ -4,23 +4,22 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, r2_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix
 
 # Load dataset
-df = pd.read_csv("Advertising.csv")
+df = pd.read_csv("Iris.csv")
 
 # Display first rows
 print("First 5 Rows:")
 print(df.head())
 
-# Remove unnecessary column if present
-if 'Unnamed: 0' in df.columns:
-    df = df.drop('Unnamed: 0', axis=1)
+# Remove Id column
+df = df.drop("Id", axis=1)
 
-# Features and target
-X = df[['TV', 'Radio', 'Newspaper']]
-y = df['Sales']
+# Features and labels
+X = df.drop("Species", axis=1)
+y = df["Species"]
 
 # Split dataset
 X_train, X_test, y_train, y_test = train_test_split(
@@ -28,49 +27,46 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Train model
-model = LinearRegression()
+model = LogisticRegression(max_iter=200)
 
 model.fit(X_train, y_train)
 
 # Predictions
 predictions = model.predict(X_test)
 
-# Evaluation
-mae = mean_absolute_error(y_test, predictions)
-r2 = r2_score(y_test, predictions)
+# Accuracy
+accuracy = accuracy_score(y_test, predictions)
 
-print("\nMean Absolute Error:", mae)
-print("R2 Score:", r2)
+print("\nModel Accuracy:", accuracy)
+
+# Confusion matrix
+cm = confusion_matrix(y_test, predictions)
 
 # -----------------------------
-# Graph 1: Actual vs Predicted
+# Graph 1: Confusion Matrix
 # -----------------------------
-plt.figure(figsize=(8,6))
+plt.figure(figsize=(6,5))
 
-plt.scatter(y_test, predictions)
+sns.heatmap(cm, annot=True, fmt='d')
 
-plt.xlabel("Actual Sales")
-plt.ylabel("Predicted Sales")
-plt.title("Actual vs Predicted Sales")
+plt.title("Confusion Matrix")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
 
 plt.show()
 
 # -----------------------------
-# Graph 2: Correlation Heatmap
+# Graph 2: Pairplot
 # -----------------------------
-plt.figure(figsize=(8,6))
-
-sns.heatmap(df.corr(), annot=True)
-
-plt.title("Correlation Heatmap")
+sns.pairplot(df, hue="Species")
 
 plt.show()
 
 # -----------------------------
 # Sample Prediction
 # -----------------------------
-sample = [[230.1, 37.8, 69.2]]
+sample = [[5.1, 3.5, 1.4, 0.2]]
 
-predicted_sales = model.predict(sample)
+prediction = model.predict(sample)
 
-print("\nPredicted Sales:", predicted_sales[0])
+print("\nPredicted Flower Species:", prediction[0])
