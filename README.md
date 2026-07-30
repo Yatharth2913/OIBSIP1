@@ -42,7 +42,7 @@ Iris Flower Dataset
 ---
 
 ## Project Files
-- YatharthDeaale_Task1.py → Main code
+- internship1.py → Main code
 - README.md → Documentation
 - requirements.txt → Required libraries
 - Iris.csv → Dataset
